@@ -10,7 +10,6 @@ export default class KegControl extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      formVisble: false,
       selectedKeg: null,
       editing: false,
       // masterKegList: [
@@ -48,14 +47,15 @@ export default class KegControl extends React.Component {
   handleClick = () => {
     if(this.state.selectedKeg != null){
       this.setState({
-        formVisible: false,
         selectedKeg: null,
         editing: false
       });
     } else {
-      this.setState(prevState =>({
-        formVisible: !prevState.formVisible,
-      }));
+      const { dispatch } =this.props;
+      const action = {
+        type: 'TOGGLE_FORM'
+      }
+      dispatch(action);
     }
   }
 
@@ -97,7 +97,10 @@ export default class KegControl extends React.Component {
       id
     }
     dispatch(action);
-    this.setState({ formVisible: false });
+    const action2 = {
+      type: 'TOGGLE_FORM'
+    }
+    dispatch(action2);
   }
   
   handleChangingSelectedKeg = (id) => {
@@ -151,7 +154,7 @@ export default class KegControl extends React.Component {
       onClickingEdit = {this.handleEditClick}/> //this toggles the EditKeg form to appear
       btnText = "Return to Keg List";
     }
-    else if (this.state.formVisible){
+    else if (this.props.formVisible){
       currentlyVisibleState = <NewKegForm onNewKegCreation={this.handleAddingNewKegToList} />
       btnText = "Return to Keg List";
     } else {
@@ -169,12 +172,14 @@ export default class KegControl extends React.Component {
 }
 
 KegControl.propTypes = {
-  masterKegList: PropTypes.object
+  masterKegList: PropTypes.object, 
+  formVisible: PropTypes.bool
 };
 
 const mapStateToProps = state => {
   return {
-    masterKegList: state
+    masterKegList: state.masterKegList,
+    formVisible: state.formVisible
   }
 }
 
