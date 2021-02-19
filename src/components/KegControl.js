@@ -2,6 +2,8 @@ import React from 'react';
 import NewKegForm from './NewKegForm';
 import KegList from './KegList';
 import KegDetail from './KegDetail';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 export default class KegControl extends React.Component {
   constructor(props){
@@ -9,35 +11,35 @@ export default class KegControl extends React.Component {
     this.state = {
       formVisble: false,
       selectedKeg: null,
-      masterKegList: [
-        {
-          name: 'Goose Neck Pilsner',
-          brewery: 'Pillsbury Brewery',
-          abv: 6.7,
-          description: 'has a pill-y, light flavor, great for the whole family',
-          price: 10,
-          pints: 1,
-          id: "0"
-        },
-        {
-          name: 'Chucks Brown Ale',
-          brewery: 'Hilltop',
-          abv: 8,
-          description: 'Chunky, dark, malty flaves',
-          price: 15,
-          pints: 127,
-          id: "1"
-        },
-        {
-          name: 'PNW IPA',
-          brewery: 'Moland Springs',
-          abv: 8.8,
-          description: 'Like sipping from a river',
-          price: 14,
-          pints: 127,
-          id: "2"
-        }
-      ]
+      // masterKegList: [
+      //   {
+      //     name: 'Goose Neck Pilsner',
+      //     brewery: 'Pillsbury Brewery',
+      //     abv: 6.7,
+      //     description: 'has a pill-y, light flavor, great for the whole family',
+      //     price: 10,
+      //     pints: 1,
+      //     id: "0"
+      //   },
+      //   {
+      //     name: 'Chucks Brown Ale',
+      //     brewery: 'Hilltop',
+      //     abv: 8,
+      //     description: 'Chunky, dark, malty flaves',
+      //     price: 15,
+      //     pints: 127,
+      //     id: "1"
+      //   },
+      //   {
+      //     name: 'PNW IPA',
+      //     brewery: 'Moland Springs',
+      //     abv: 8.8,
+      //     description: 'Like sipping from a river',
+      //     price: 14,
+      //     pints: 127,
+      //     id: "2"
+      //   }
+      // ]
     };
   }
 
@@ -56,25 +58,35 @@ export default class KegControl extends React.Component {
 
   
   handleAddingNewKegToList = (newKeg) => {
-    const newMasterKegList = this.state.masterKegList.concat(newKeg);
-    this.setState({masterKegList: newMasterKegList,
-      formVisible: false 
-    });
+    const { dispatch } = this.props;
+    const { name, brewery, abv, description, price, pints, id } = newKeg;
+    const action = {
+      type: 'ADD_KEG',
+      id,
+      name,
+      brewery,
+      abv,
+      description,
+      price,
+      pints,
+    }
+    dispatch(action);
+    this.setState({ formVisible: false });
   }
   
   handleChangingSelectedKeg = (id) => {
-    const selectedKeg = this.state.masterKegList.filter(keg => keg.id === id)[0];
-    this.setState({
-      selectedKeg: selectedKeg
-    });
+    const selectedKeg = this.props.masterKegList[0];
+    this.setState({ selectedKeg: selectedKeg });
   }
 
   handleDeletingKeg = (id) => {
-    const newMasterKegList = this.state.masterKegList.filter(keg => keg.id !== id);
-    this.setState({
-      masterKegList: newMasterKegList,
-      selectedKeg: null
-    });
+    const { dispatch } = this.props;
+    const action = {
+      type: 'DELETE_KEG',
+      id: id
+    }
+    dispatch(action);
+    this.setState({ selectedKeg: null });
   }
 
   handleSellingPint = (id) => {
@@ -105,7 +117,7 @@ export default class KegControl extends React.Component {
       currentlyVisibleState = <NewKegForm onNewKegCreation={this.handleAddingNewKegToList} />
       btnText = "Return to Keg List";
     } else {
-      currentlyVisibleState = <KegList kegList={this.state.masterKegList} onKegSelection={this.handleChangingSelectedKeg}/>
+      currentlyVisibleState = <KegList kegList={this.props.masterKegList} onKegSelection={this.handleChangingSelectedKeg}/>
       btnText = "Add Keg";
     }
 
@@ -117,3 +129,15 @@ export default class KegControl extends React.Component {
     );
   }
 }
+
+KegControl.propTypes = {
+  masterKegList: PropTypes.object
+};
+
+const mapStateToProps = state => {
+  return {
+    masterKegList: state
+  }
+}
+
+KegControl = connect(mapStateToProps)(KegControl);
