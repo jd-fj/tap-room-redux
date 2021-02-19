@@ -4,6 +4,7 @@ import KegList from './KegList';
 import KegDetail from './KegDetail';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import EditKegForm from './EditKegForm';
 
 export default class KegControl extends React.Component {
   constructor(props){
@@ -11,6 +12,7 @@ export default class KegControl extends React.Component {
     this.state = {
       formVisble: false,
       selectedKeg: null,
+      editing: false,
       // masterKegList: [
       //   {
       //     name: 'Goose Neck Pilsner',
@@ -56,19 +58,35 @@ export default class KegControl extends React.Component {
     }
   }
 
-  
-  handleAddingNewKegToList = (newKeg) => {
+  handleEditingKegInList = (kegToEdit) => {
     const { dispatch } = this.props;
-    const { name, brewery, abv, description, price, pints, id } = newKeg;
+    const { name, brewery, abv, description, price, pints, id } = kegToEdit;
     const action = {
       type: 'ADD_KEG',
-      id,
       name,
       brewery,
       abv,
       description,
       price,
       pints,
+      id
+    }
+    dispatch(action);
+    this.setState({ selectedPost: null });
+  }
+
+  handleAddingNewKegToList = (newKeg) => {
+    const { dispatch } = this.props;
+    const { name, brewery, abv, description, price, pints, id } = newKeg;
+    const action = {
+      type: 'ADD_KEG',
+      name,
+      brewery,
+      abv,
+      description,
+      price,
+      pints,
+      id
     }
     dispatch(action);
     this.setState({ formVisible: false });
@@ -109,7 +127,14 @@ export default class KegControl extends React.Component {
     let currentlyVisibleState = null;
     let btnText = null;
 
-    if (this.state.selectedKeg != null) {
+    if (this.state.editing){
+      currentlyVisibleState =
+      <EditKegForm
+      keg={this.state.selectedKeg}
+      onEditKeg={this.handleEditingKegInList}
+      />
+    }
+    else if (this.state.selectedKeg != null) {
       currentlyVisibleState = <KegDetail keg={this.state.selectedKeg} onClickingSell={this.handleSellingPint} onClickingDelete = {this.handleDeletingKeg}/>
       btnText = "Return to Keg List";
     }
