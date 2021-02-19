@@ -4,10 +4,10 @@ import './index.css';
 import App from './components/App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { createStore } from 'redux';
-import reducer from './reducers/keg-list-reducer';
 import { Provider } from 'react-redux';
+import rootReducer from './reducers/index';
 
-const store = createStore(reducer);
+const store = createStore(rootReducer);
 
 store.subscribe(() => 
   console.log(store.getState())
