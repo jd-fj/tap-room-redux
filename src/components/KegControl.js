@@ -49,13 +49,18 @@ export default class KegControl extends React.Component {
     if(this.state.selectedKeg != null){
       this.setState({
         formVisible: false,
-        selectedKeg: null
+        selectedKeg: null,
+        editing: false
       });
     } else {
       this.setState(prevState =>({
         formVisible: !prevState.formVisible,
       }));
     }
+  }
+
+  handleEditClick = () => {
+    this.setState({ editing: true });
   }
 
   handleEditingKegInList = (kegToEdit) => {
@@ -72,7 +77,10 @@ export default class KegControl extends React.Component {
       id
     }
     dispatch(action);
-    this.setState({ selectedPost: null });
+    this.setState({ 
+      editing: false,
+      selectedKeg: null 
+    });
   }
 
   handleAddingNewKegToList = (newKeg) => {
@@ -131,11 +139,16 @@ export default class KegControl extends React.Component {
       currentlyVisibleState =
       <EditKegForm
       keg={this.state.selectedKeg}
-      onEditKeg={this.handleEditingKegInList}
+      onEditKeg={this.handleEditingKegInList} //this adds updated keg info from EditKegForm to KegList
       />
     }
     else if (this.state.selectedKeg != null) {
-      currentlyVisibleState = <KegDetail keg={this.state.selectedKeg} onClickingSell={this.handleSellingPint} onClickingDelete = {this.handleDeletingKeg}/>
+      currentlyVisibleState = 
+      <KegDetail 
+      keg={this.state.selectedKeg} 
+      onClickingSell={this.handleSellingPint} 
+      onClickingDelete = {this.handleDeletingKeg}
+      onClickingEdit = {this.handleEditClick}/> //this toggles the EditKeg form to appear
       btnText = "Return to Keg List";
     }
     else if (this.state.formVisible){
