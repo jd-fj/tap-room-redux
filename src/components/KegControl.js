@@ -5,42 +5,14 @@ import KegDetail from './KegDetail';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import EditKegForm from './EditKegForm';
+import * as a from './../actions';
 
 export default class KegControl extends React.Component {
   constructor(props){
     super(props);
     this.state = {
       selectedKeg: null,
-      editing: false,
-      // masterKegList: [
-      //   {
-      //     name: 'Goose Neck Pilsner',
-      //     brewery: 'Pillsbury Brewery',
-      //     abv: 6.7,
-      //     description: 'has a pill-y, light flavor, great for the whole family',
-      //     price: 10,
-      //     pints: 1,
-      //     id: "0"
-      //   },
-      //   {
-      //     name: 'Chucks Brown Ale',
-      //     brewery: 'Hilltop',
-      //     abv: 8,
-      //     description: 'Chunky, dark, malty flaves',
-      //     price: 15,
-      //     pints: 127,
-      //     id: "1"
-      //   },
-      //   {
-      //     name: 'PNW IPA',
-      //     brewery: 'Moland Springs',
-      //     abv: 8.8,
-      //     description: 'Like sipping from a river',
-      //     price: 14,
-      //     pints: 127,
-      //     id: "2"
-      //   }
-      // ]
+      editing: false
     };
   }
 
@@ -52,9 +24,7 @@ export default class KegControl extends React.Component {
       });
     } else {
       const { dispatch } =this.props;
-      const action = {
-        type: 'TOGGLE_FORM'
-      }
+      const action = a.toggleForm();
       dispatch(action);
     }
   }
@@ -66,16 +36,7 @@ export default class KegControl extends React.Component {
   handleEditingKegInList = (kegToEdit) => {
     const { dispatch } = this.props;
     const { name, brewery, abv, description, price, pints, id } = kegToEdit;
-    const action = {
-      type: 'ADD_KEG',
-      name,
-      brewery,
-      abv,
-      description,
-      price,
-      pints,
-      id
-    }
+    const action = a.addKeg(kegToEdit);
     dispatch(action);
     this.setState({ 
       editing: false,
@@ -86,20 +47,9 @@ export default class KegControl extends React.Component {
   handleAddingNewKegToList = (newKeg) => {
     const { dispatch } = this.props;
     const { name, brewery, abv, description, price, pints, id } = newKeg;
-    const action = {
-      type: 'ADD_KEG',
-      name,
-      brewery,
-      abv,
-      description,
-      price,
-      pints,
-      id
-    }
+    const action = a.addKeg(newKeg);
     dispatch(action);
-    const action2 = {
-      type: 'TOGGLE_FORM'
-    }
+    const action2 = a.toggleForm();
     dispatch(action2);
   }
   
@@ -110,10 +60,7 @@ export default class KegControl extends React.Component {
 
   handleDeletingKeg = (id) => {
     const { dispatch } = this.props;
-    const action = {
-      type: 'DELETE_KEG',
-      id: id
-    }
+    const action = a.deleteKeg(id);
     dispatch(action);
     this.setState({ selectedKeg: null });
   }
