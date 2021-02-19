@@ -21,7 +21,28 @@ describe('rootReducer', () => {
     expect(store.getState().formVisible).toEqual(formVisibleReducer(undefined, { type: null }));
   });
 
+  test('Check that ADD_KEG action works for kegListReducer and root reducer', () => {
+    const action = {
+      type: 'ADD_KEG',
+      name: 'Goose Neck Pilsner',
+      brewery: 'Pillsbury Brewery',
+      abv: 6.7,
+      description: 'has a pill-y, light flavor, great for the whole family',
+      price: 10,
+      pints: 1,
+      id: "0"
+    }
+    store.dispatch(action);
+    expect(store.getState().masterKegList).toEqual(kegListReducer(undefined, action));
+  });
 
+  test('Check that TOGGLE_FORM action works for formVisibleReducer and root reducer', () => {
+    const action = {
+      type: 'TOGGLE_FORM'
+    }
+    store.dispatch(action);
+    expect(store.getState().formVisible).toEqual(formVisibleReducer(undefined, action));
+  });
 
 
 });
