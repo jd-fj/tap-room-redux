@@ -2,6 +2,8 @@ import kegListReducer from '../../reducers/keg-list-reducer';
 
 describe('kegListReducer', () => {
 
+  let action;
+
   const currentState = {
       1: {name: 'Goose Neck Pilsner',
       brewery: 'Pillsbury Brewery',
@@ -19,16 +21,16 @@ describe('kegListReducer', () => {
       id: 2 }
     }
 
-  let action;
-  const kegData = {
-    name: 'Goose Neck Pilsner',
-    brewery: 'Pillsbury Brewery',
-    abv: 6.7,
-    description: 'has a pill-y, light flavor, great for the whole family',
-    price: 10,
-    pints: 1,
-    id: "0"
-  };
+    const kegData = {
+      name: 'Goose Neck Pilsner',
+      brewery: 'Pillsbury Brewery',
+      abv: 6.7,
+      description: 'has a pill-y, light flavor, great for the whole family',
+      price: 10,
+      pints: 1,
+      id: "0"
+    };
+
 
   test('Should return default state if there is no action type passed into the reducer', () => {
     expect(kegListReducer({}, { type: null })).toEqual({});
@@ -56,8 +58,8 @@ describe('kegListReducer', () => {
         pints,
         id
       }
-    })
-  })
+    });
+  });
 
   test('Should successfully delete a keg', () => {
     action = {
