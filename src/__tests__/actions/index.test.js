@@ -31,7 +31,7 @@ describe('tap room actions', () => {
       description: 'has a pill-y, light flavor, great for the whole family',
       price: 10,
       pints: 1,
-      id: "0"
+      id: 1
     });
   });
 });
