@@ -1,4 +1,4 @@
 export const deleteKeg = id => ({
-  type: 'FOOBAR',
+  type: 'DELETE_KEG',
   id
 });
