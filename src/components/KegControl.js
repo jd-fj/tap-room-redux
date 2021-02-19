@@ -75,7 +75,7 @@ export default class KegControl extends React.Component {
   }
   
   handleChangingSelectedKeg = (id) => {
-    const selectedKeg = this.props.masterKegList[0];
+    const selectedKeg = this.props.masterKegList[id];
     this.setState({ selectedKeg: selectedKeg });
   }
 
