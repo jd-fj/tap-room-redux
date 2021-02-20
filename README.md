@@ -59,4 +59,10 @@ Make a resuable form that both 'Add Keg' and 'Edit Keg' can use
 Show different pictures/colors when a keg has <= 20 pints left
 
 ## Known Bugs
+Selling a pint button not working
+Form not showing placeholder text for TextArea
+get editForm to automatically populate previous Keg props
+Move all state to redux
+Edit Keg view's "return to list" button not showing text
+
 _no known bugs at this time_
