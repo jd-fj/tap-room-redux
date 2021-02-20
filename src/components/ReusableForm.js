@@ -9,14 +9,16 @@ export default function ReusableForm(props){
           <input className='form-control'
             type='text'
             name='name'
+            
             placeholder='Beverage Name' />
           <input className='form-control'
             type='text'
             name='brewery'
             placeholder='Brewery' />
-          <textarea className='form-control'
+          <input className='form-control'
+            type='text'
             name='description'
-            placeholde='Beverage Description' />
+            placeholder='Beverage Description' />
           <input className='form-control'
             type='float'
             name='abv'
