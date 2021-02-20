@@ -20,7 +20,7 @@ export default function EditKegForm(props){
   return (
     <>
       <ReusableForm 
-          defaultValue={props.name}
+          defaultValue={keg.name}
           buttonText="Update Keg"
           formSubmissionHandler={handleEditKegFormSubmission}
           />

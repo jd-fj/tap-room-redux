@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default function ReusableForm(props){
+  
   return (
     <>
       <h1>FORM</h1>
@@ -9,7 +10,7 @@ export default function ReusableForm(props){
           <input className='form-control'
             type='text'
             name='name'
-            
+
             placeholder='Beverage Name' />
           <input className='form-control'
             type='text'

@@ -91,6 +91,7 @@ export default class KegControl extends React.Component {
       keg={this.state.selectedKeg}
       onEditKeg={this.handleEditingKegInList} //this adds updated keg info from EditKegForm to KegList
       />
+      btnText = "Return to Keg List"
     }
     else if (this.state.selectedKeg != null) {
       currentlyVisibleState = 
