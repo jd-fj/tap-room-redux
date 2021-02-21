@@ -52,15 +52,10 @@ code .
 Please reach out [here](mailto:taylulzcode@gmail.com) if you need any assistance
 
 ## Future Features
-Add an 'Edit Keg' button to 'Keg Details' page
-
-Make a resuable form that both 'Add Keg' and 'Edit Keg' can use
 
 Show different pictures/colors when a keg has <= 20 pints left
 
 ## Known Bugs
-Selling a pint button not working
-
 
 get editForm to automatically populate previous Keg props
 
