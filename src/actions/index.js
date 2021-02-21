@@ -22,17 +22,3 @@ export const addKeg = (keg) => {
     id
   }
 }
-
-export const sellPint = (keg) => {
-  const {name, brewery, abv, description, price, pints, id } = keg;
-  return {
-    type: c.SELL_PINT,
-    name,
-    brewery,
-    abv,
-    description,
-    price,
-    pints,
-    id
-  }
-}

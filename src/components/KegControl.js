@@ -73,7 +73,6 @@ export default class KegControl extends React.Component {
     const action = a.addKeg(updatedKeg);
     dispatch(action);
     this.setState({ selectedKeg: updatedKeg });
-
   }
 
   render(){
