@@ -46,10 +46,10 @@ export default class KegControl extends React.Component {
 
   handleAddingNewKegToList = (newKeg) => {
     const { dispatch } = this.props;
-    const { name, brewery, abv, description, price, pints, id } = newKeg;
+    // const { name, brewery, abv, description, price, pints, id } = newKeg;
     const action = a.addKeg(newKeg);
     dispatch(action);
-    const action2 = a.toggleForm();
+    const action2 = a.toggleForm(); //maybe need to pass newKeg into here?
     dispatch(action2);
   }
   
@@ -66,19 +66,14 @@ export default class KegControl extends React.Component {
   }
 
   handleSellingPint = (id) => {
-    this.setState({
-      ...this.state, 
-      selectedKeg: null,
-      masterKegList: this.state.masterKegList.map((keg) => {
-        if (keg.id === id) {
-          return{
-            ...keg,
-            pints: (keg.pints -1)
-          };
-        }
-      return keg; 
-      })
-    })
+    const { dispatch } = this.props;
+    const selectedKeg = this.props.masterKegList[id];
+    const updatedKeg = {...selectedKeg.pints - 1};
+    const action = a.addKeg(updatedKeg);
+    dispatch(action);
+    // this.setState({
+    //   selecteKeg: updatedKeg
+    // })
   }
 
   render(){

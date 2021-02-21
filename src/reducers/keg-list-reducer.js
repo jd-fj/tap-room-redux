@@ -23,3 +23,5 @@ export default (state = {}, action) => {
         return state;
   }
 };
+
+//communicating intended actions to the store, concerning the keg list
