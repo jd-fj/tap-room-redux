@@ -20,8 +20,12 @@ export default (state = {}, action) => {
         delete newState[id];
         return newState;
       case c.SELL_PINT:
-        let sellPint = {...state[id].pints - 1};
-        return sellPint;
+        console.log(state);
+        return state;
+        // let sellPint = {...state};
+        // console.log(state);
+        // // console.log(sellPint);
+        // return state;
       default:
         return state;
   }

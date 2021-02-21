@@ -68,12 +68,12 @@ export default class KegControl extends React.Component {
   handleSellingPint = (id) => {
     const { dispatch } = this.props;
     const selectedKeg = this.props.masterKegList[id];
-    const updatedKeg = {...selectedKeg.pints - 1};
+    const newPints = selectedKeg.pints - 1;
+    const updatedKeg = {...selectedKeg, pints: newPints}
     const action = a.addKeg(updatedKeg);
     dispatch(action);
-    // this.setState({
-    //   selecteKeg: updatedKeg
-    // })
+    this.setState({ selectedKeg: updatedKeg });
+
   }
 
   render(){

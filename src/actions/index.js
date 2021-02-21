@@ -24,9 +24,15 @@ export const addKeg = (keg) => {
 }
 
 export const sellPint = (keg) => {
-  const { pints } = keg;
+  const {name, brewery, abv, description, price, pints, id } = keg;
   return {
     type: c.SELL_PINT,
-    pints: keg.pints - 1
+    name,
+    brewery,
+    abv,
+    description,
+    price,
+    pints,
+    id
   }
 }
