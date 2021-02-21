@@ -27,4 +27,3 @@ KegDetail.propTypes = {
   onClickingSell: PropTypes.func,
   onClickingEdit: PropTypes.func
 };
-// style={{backgroundColor: timeOfDayColor}}

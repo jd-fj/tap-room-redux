@@ -12,7 +12,7 @@ export default class KegControl extends React.Component {
     super(props);
     this.state = {
       selectedKeg: null,
-      editing: false
+      // editing: false
     };
   }
 
@@ -20,7 +20,7 @@ export default class KegControl extends React.Component {
     if(this.state.selectedKeg != null){
       this.setState({
         selectedKeg: null,
-        editing: false
+        // editing: false
       });
     } else {
       const { dispatch } =this.props;
@@ -39,7 +39,7 @@ export default class KegControl extends React.Component {
     const action = a.addKeg(kegToEdit);
     dispatch(action);
     this.setState({ 
-      editing: false,
+      // editing: false,
       selectedKeg: null 
     });
   }
