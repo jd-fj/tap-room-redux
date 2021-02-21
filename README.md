@@ -62,11 +62,8 @@ Show different pictures/colors when a keg has <= 20 pints left
 Selling a pint button not working
 
 
-
 get editForm to automatically populate previous Keg props
 
 Move all state to redux
-
-
 
 _no known bugs at this timegit_
