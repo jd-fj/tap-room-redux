@@ -12,7 +12,7 @@ export default function KegDetail(props){
       <h5>Description: {keg.description}</h5>
       <h5>ABV: {keg.abv}</h5>
       <h5>Price: ${keg.price}</h5>
-      {keg.pints === 0 ? <h5>No More Pints Left</h5> : keg.pints <= 10 ? <h5>Only 10 Kegs Left!</h5> : <h5>{keg.pints}</h5>} 
+      {keg.pints === 0 ? <h5 style={{color: 'red'}}>No More Pints Left</h5> : keg.pints <= 10 ? <h5 style={{color: 'red'}}>Keg Low! {keg.pints} pints left</h5> : <h5>{keg.pints}</h5>} 
       <button onClick={()=> onClickingDelete(keg.id)}>Delete Keg</button>
       {keg.pints > 0 ? <button onClick={()=> onClickingSell(keg.id)}>Sell a Pint from this Keg</button> : null}
       <button onClick={() => onClickingEdit(keg)}>Edit Keg Deets</button>
@@ -27,3 +27,4 @@ KegDetail.propTypes = {
   onClickingSell: PropTypes.func,
   onClickingEdit: PropTypes.func
 };
+// style={{backgroundColor: timeOfDayColor}}
