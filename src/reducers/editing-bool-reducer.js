@@ -5,6 +5,6 @@ export default (state = false, action) => {
   case c.TOGGLE_EDITING:
     return !state;
   default:
-    return true;
+    return state;
   }
 };
