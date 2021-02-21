@@ -20,7 +20,11 @@ export default function EditKegForm(props){
   return (
     <>
       <ReusableForm 
-          defaultValue={keg.name}
+          kegName={keg.name}
+          kegBrewery={keg.brewery}
+          kegDescription={keg.description}
+          kegPrice={keg.price}
+          kegPints={keg.pints}
           buttonText="Update Keg"
           formSubmissionHandler={handleEditKegFormSubmission}
           />
@@ -29,5 +33,10 @@ export default function EditKegForm(props){
 }
 
 EditKegForm.propTypes = {
-  onEditKeg: PropTypes.func
+  onEditKeg: PropTypes.func,
+  kegName: PropTypes.string,
+  kegBrewery: PropTypes.string,
+  kegDescription: PropTypes.string,
+  kegPrice: PropTypes.string,
+  kegPints: PropTypes.string
 }
