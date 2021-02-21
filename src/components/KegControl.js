@@ -18,30 +18,39 @@ export default class KegControl extends React.Component {
 
   handleClick = () => {
     if(this.state.selectedKeg != null){
+      const { dispatch } = this.props;
+      const action1 = a.toggleEditing();
+      dispatch(action1);
       this.setState({
         selectedKeg: null,
-        // editing: false
+        // editing: false,
       });
     } else {
-      const { dispatch } =this.props;
+      const { dispatch } = this.props;
       const action = a.toggleForm();
       dispatch(action);
     }
   }
 
   handleEditClick = () => {
-    this.setState({ editing: true });
+    const { dispatch } = this.props;
+    const action = a.toggleEditing();
+    dispatch(action);
+    console.log( this.props)
+    // this.setState({ editing: true });
   }
 
   handleEditingKegInList = (kegToEdit) => {
     const { dispatch } = this.props;
-    const { name, brewery, abv, description, price, pints, id } = kegToEdit;
+    // const { name, brewery, abv, description, price, pints, id } = kegToEdit;
     const action = a.addKeg(kegToEdit);
+    const action2 = a.toggleEditing();
     dispatch(action);
     this.setState({ 
       // editing: false,
       selectedKeg: null 
     });
+    dispatch(action2)
   }
 
   handleAddingNewKegToList = (newKeg) => {
@@ -79,7 +88,7 @@ export default class KegControl extends React.Component {
     let currentlyVisibleState = null;
     let btnText = null;
 
-    if (this.state.editing){
+    if (this.props.editing){ // this is not working as I imagined it would
       currentlyVisibleState =
       <EditKegForm
       keg={this.state.selectedKeg}
@@ -121,7 +130,8 @@ KegControl.propTypes = {
 const mapStateToProps = state => {
   return {
     masterKegList: state.masterKegList,
-    formVisible: state.formVisible
+    formVisible: state.formVisible,
+    editing: state.editing
   }
 }
 
