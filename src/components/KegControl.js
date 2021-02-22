@@ -42,10 +42,10 @@ export default class KegControl extends React.Component {
     const action = a.addKeg(kegToEdit);
     const action2 = a.toggleEditing();
     dispatch(action);
+    dispatch(action2)
     this.setState({ 
       selectedKeg: null 
     });
-    dispatch(action2)
   }
 
   handleAddingNewKegToList = (newKeg) => {
