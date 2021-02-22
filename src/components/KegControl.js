@@ -12,7 +12,6 @@ export default class KegControl extends React.Component {
     super(props);
     this.state = {
       selectedKeg: null,
-      // editing: false
     };
   }
 
@@ -23,7 +22,6 @@ export default class KegControl extends React.Component {
       dispatch(action1);
       this.setState({
         selectedKeg: null,
-        // editing: false,
       });
     } else {
       const { dispatch } = this.props;
@@ -37,17 +35,14 @@ export default class KegControl extends React.Component {
     const action = a.toggleEditing();
     dispatch(action);
     console.log( this.props)
-    // this.setState({ editing: true });
   }
 
   handleEditingKegInList = (kegToEdit) => {
     const { dispatch } = this.props;
-    // const { name, brewery, abv, description, price, pints, id } = kegToEdit;
     const action = a.addKeg(kegToEdit);
     const action2 = a.toggleEditing();
     dispatch(action);
     this.setState({ 
-      // editing: false,
       selectedKeg: null 
     });
     dispatch(action2)
@@ -55,10 +50,9 @@ export default class KegControl extends React.Component {
 
   handleAddingNewKegToList = (newKeg) => {
     const { dispatch } = this.props;
-    // const { name, brewery, abv, description, price, pints, id } = newKeg;
     const action = a.addKeg(newKeg);
     dispatch(action);
-    const action2 = a.toggleForm(); //maybe need to pass newKeg into here?
+    const action2 = a.toggleForm();
     dispatch(action2);
   }
   
@@ -88,11 +82,11 @@ export default class KegControl extends React.Component {
     let currentlyVisibleState = null;
     let btnText = null;
 
-    if (this.props.editing){ // this is not working as I imagined it would
+    if (this.props.editing){
       currentlyVisibleState =
       <EditKegForm
       keg={this.state.selectedKeg}
-      onEditKeg={this.handleEditingKegInList} //this adds updated keg info from EditKegForm to KegList
+      onEditKeg={this.handleEditingKegInList}
       />
       btnText = "Return to Keg List"
     }
@@ -102,7 +96,7 @@ export default class KegControl extends React.Component {
       keg={this.state.selectedKeg} 
       onClickingSell={this.handleSellingPint} 
       onClickingDelete = {this.handleDeletingKeg}
-      onClickingEdit = {this.handleEditClick}/> //this toggles the EditKeg form to appear
+      onClickingEdit = {this.handleEditClick}/>
       btnText = "Return to Keg List";
     }
     else if (this.props.formVisible){
